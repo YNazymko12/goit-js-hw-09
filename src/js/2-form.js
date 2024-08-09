@@ -29,18 +29,22 @@ fillFormFields();
 const onFormSubmit = event => {
   event.preventDefault();
   if (
-    event.target.elements.message.value === '' ||
-    event.target.elements.email.value === ''
+    event.target.elements.message.value.trim() === '' ||
+    event.target.elements.email.value.trim() === ''
   ) {
     return swal('Fill please all fields');
   }
   console.log(formData);
   event.target.reset();
   localStorage.removeItem('feedback-form-state');
+  formData = {
+    email: '',
+    message: '',
+  };
 };
 const onFormInput = event => {
   const fieldName = event.target.name;
-  const fieldValue = event.target.value;
+  const fieldValue = event.target.value.trim();
 
   formData[fieldName] = fieldValue;
 
